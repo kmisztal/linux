@@ -51,3 +51,47 @@ ls [*opcja*] [*plik*]
 Przykładowe opcje:
 * -l - pokazuje nam bardziej szczegółową liste plików
 * -lt - szczegółowa lista zostanie dodatkowo posortowana od ostatnio używanych plików
+
+
+## `find` 
+The `find` command can be used in a Linux terminal to search for files or directories within a specified path. [The Linux manual page](https://linux.die.net/man/1/find) provides the following format for using the `find` command:
+
+```sh
+find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]
+```
+
+For our purposes, the `[-H]`, `[-L]`, `[-P]`, `[-D debugopts]`, and `[-Olevel]` options shall be omitted. These affect the way the `find` command treats symbolic links as well as reordering tests conducted by the command to speed up execution.
+
+#### Searching for a file
+
+The following format can be used when searching for a file, starting the search at a certain path (directory):
+
+```sh
+find [path] -name [filename] -type f
+```
+
+Here is an example use case:
+
+```sh
+find ./ -name "*.page" -type f
+```
+
+This command will start searching in the current working directory (`./`) for a file (specified with the `-type f` argument) of the exact name `*.page`, where the asterisk here can be replaced with any permissible string of symbols. The word "exact" here refers to the other symbols specified without the asterisk, that is `.page`. In other words, the `file` command will search for any file that ends with `.page`.
+
+In the case that we would like the command to search for files while remaining case-insensitive, that is, to also output the path of files that in the above case would have a file ending of `.Page`, `.PAGE`, etc., we should use the -iname argument.
+
+#### Searching for a directory
+
+A very similar format to the one used when searching for a file is used when searching for a directory:
+
+```sh
+find [path] -name [directoryname] -type d
+```
+
+The main difference here is that we specify the argument `-type` to look for directories, `d`.
+
+Example use case:
+
+```sh
+find ./ -name "pictures" -type d
+```
